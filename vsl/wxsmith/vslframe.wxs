@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="vslFrame">
+		<title>vsl player</title>
+		<size>820,400</size>
+		<id_arg>0</id_arg>
+		<handler function="OnKeyDown" entry="EVT_KEY_DOWN" />
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxSlider" name="ID_SLIDER1" variable="slVolume" member="yes">
+							<value>10</value>
+							<tickfreq>5</tickfreq>
+							<pagesize>2</pagesize>
+							<tooltip>master volume</tooltip>
+							<help>master volume</help>
+							<style>wxSL_AUTOTICKS</style>
+							<handler function="OnslVolumeCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>10</border>
+						<option>3</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxCheckBox" name="ID_CHECKBOX1" variable="cbAutoPlay" member="yes">
+							<label>autoplay</label>
+							<checked>1</checked>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
+							<label>Symbols</label>
+							<size>81,16</size>
+							<style>wxALIGN_RIGHT</style>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxChoice" name="ID_CHOICE1" variable="chSymbols" member="yes">
+							<handler function="OnchSymbolsSelect" entry="EVT_CHOICE" />
+						</object>
+						<flag>wxALL</flag>
+						<border>5</border>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<object class="sizeritem">
+						<object class="wxListBox" name="ID_LISTBOX1" variable="lbPreset" member="yes">
+							<default>-1</default>
+							<fg>#8D4324</fg>
+							<font>
+								<size>9</size>
+								<style>normal</style>
+								<weight>normal</weight>
+								<underlined>0</underlined>
+								<family>teletype</family>
+								<face>Monospace</face>
+							</font>
+							<style>wxBORDER_RAISED</style>
+							<handler function="OnlbPresetSelect" entry="EVT_LISTBOX" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxStaticLine" name="ID_STATICLINE1" variable="StaticLine1" member="yes">
+							<size>10,-1</size>
+							<style>wxLI_VERTICAL|wxBORDER_SIMPLE</style>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxTextCtrl" name="ID_VSLTEXT" variable="TextVSL" member="yes">
+							<size>699,418</size>
+							<focused>1</focused>
+							<fg>#0C00FF</fg>
+							<font>
+								<size>10</size>
+								<style>normal</style>
+								<weight>bold</weight>
+								<underlined>0</underlined>
+								<family>teletype</family>
+								<face>FreeMono</face>
+							</font>
+							<style>wxTE_MULTILINE</style>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>7</option>
+					</object>
+				</object>
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>10</option>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
+			<fields>1</fields>
+			<widths>-10</widths>
+			<styles>wxSB_NORMAL</styles>
+		</object>
+		<object class="wxToolBar" name="ID_TOOLBAR1" variable="ToolBar1" member="yes">
+			<style>wxTB_VERTICAL|wxBORDER_DOUBLE|wxBORDER_SUNKEN</style>
+			<object class="tool" name="ID_TBPLAY" variable="TBPlay" member="yes">
+				<label>play</label>
+				<bitmap stock_id="wxART_REDO" />
+				<tooltip>play VSL</tooltip>
+				<longhelp>play VSL</longhelp>
+				<handler function="OntbPlayClicked" entry="EVT_TOOL" />
+			</object>
+			<object class="tool" name="ID_TB_OPEN" variable="TBOpen" member="yes">
+				<label>open</label>
+				<bitmap stock_id="wxART_FILE_OPEN" />
+				<tooltip>open VSL file</tooltip>
+				<longhelp>open VSL file</longhelp>
+				<handler function="OnTBOpenClicked" entry="EVT_TOOL" />
+			</object>
+			<object class="tool" name="ID_TB_SAVE" variable="TB_Save" member="yes">
+				<label>save</label>
+				<bitmap stock_id="wxART_FILE_SAVE" />
+				<tooltip>save VSL to file</tooltip>
+				<longhelp>save current VSL file</longhelp>
+				<handler function="OnTB_SaveClicked" entry="EVT_TOOL" />
+			</object>
+			<object class="separator" />
+			<object class="tool" name="ID_TBCLEAR" variable="TB_new" member="yes">
+				<label>new</label>
+				<bitmap stock_id="wxART_NEW" />
+				<longhelp>new vsl</longhelp>
+				<handler function="OnTB_newClicked" entry="EVT_TOOL" />
+			</object>
+			<object class="separator" />
+			<object class="tool" name="ID_TB_RAND" variable="TB_Rand" member="yes">
+				<label>random</label>
+				<bitmap stock_id="wxART_QUESTION" />
+				<tooltip>random wave</tooltip>
+				<longhelp>random wave</longhelp>
+				<handler function="OnTB_RandClicked" entry="EVT_TOOL" />
+			</object>
+			<object class="tool" name="ID_TB_EXPORT" variable="TB_Export" member="yes">
+				<label>export__wav</label>
+				<bitmap stock_id="wxART_FILE_SAVE_AS" />
+				<tooltip>export to WAV file</tooltip>
+				<longhelp>export to WAV</longhelp>
+				<handler function="OnTB_ExportClicked" entry="EVT_TOOL" />
+			</object>
+		</object>
+		<object class="wxFileDialog" variable="fdOpen" member="yes">
+			<message>open VSL</message>
+			<wildcard>*.vsl</wildcard>
+			<style>wxFD_OPEN</style>
+		</object>
+		<object class="wxFileDialog" variable="fdSave" member="yes">
+			<message>Write VSL</message>
+			<wildcard>*.vsl</wildcard>
+			<style>wxFD_SAVE</style>
+		</object>
+		<object class="wxFileDialog" variable="fdExport" member="yes">
+			<message>export to wav</message>
+			<style>wxFD_SAVE</style>
+		</object>
+	</object>
+</wxsmith>
