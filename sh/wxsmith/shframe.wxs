@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="shFrame">
+		<title>Spherical Harmonics</title>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+							<object class="sizeritem">
+								<object class="wxChoice" name="ID_CHOICE1" variable="chFileType" member="yes">
+									<content>
+										<item>ctm</item>
+										<item>ply</item>
+									</content>
+									<selection>0</selection>
+									<tooltip>save file format</tooltip>
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>5</border>
+							</object>
+							<object class="sizeritem">
+								<object class="wxButton" name="ID_BUTTON1" variable="btSave" member="yes">
+									<label>save</label>
+									<size>36,30</size>
+									<handler function="OnbtSaveClick" entry="EVT_BUTTON" />
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>5</border>
+							</object>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL1" variable="scColorMap" member="yes">
+							<value>7</value>
+							<max>27</max>
+							<size>110,30</size>
+							<tooltip>color map</tooltip>
+							<handler function="OnscColorMapChange" entry="EVT_SPINCTRL" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL2" variable="scResol" member="yes">
+							<value>128</value>
+							<min>64</min>
+							<max>4096</max>
+							<size>110,30</size>
+							<tooltip>resolution</tooltip>
+							<handler function="OnscResolChange" entry="EVT_SPINCTRL" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxListBox" name="ID_LISTBOX1" variable="lbCodes" member="yes">
+							<default>-1</default>
+							<size>107,387</size>
+							<tooltip>SH preset codes</tooltip>
+							<handler function="OnlbCodesSelect" entry="EVT_LISTBOX" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxGLCanvas" name="ID_GLCANVAS1" subclass="wxGLCanvasSH" variable="GLCanvasSH" member="yes">
+					<mLevel>4294967296</mLevel>
+					<mMinAlpha>34359738368</mMinAlpha>
+					<mDepthSize>8</mDepthSize>
+					<size>435,477</size>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
+			<fields>1</fields>
+			<widths>-1</widths>
+			<styles>wxSB_NORMAL</styles>
+		</object>
+	</object>
+</wxsmith>
