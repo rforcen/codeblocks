@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="mandelbrotFrame">
+		<title>mandelbrot</title>
+		<centered>1</centered>
+		<size>442,412</size>
+		<bg>wxSYS_COLOUR_BTNSHADOW</bg>
+		<minsize>-1,-1</minsize>
+		<maxsize>-1,-1</maxsize>
+		<handler function="OnClose" entry="EVT_CLOSE" />
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL1" variable="scIters" member="yes">
+							<value>256</value>
+							<min>100</min>
+							<max>9000</max>
+							<size>101,30</size>
+							<tooltip># iterations</tooltip>
+							<handler function="OnscItersChange" entry="EVT_SPINCTRL" />
+						</object>
+						<flag>wxEXPAND</flag>
+					</object>
+					<object class="sizeritem">
+						<object class="wxChoice" name="ID_CHOICE1" variable="chEngine" member="yes">
+							<content>
+								<item>f32 - float</item>
+								<item>f64 - double</item>
+								<item>f128 - long double</item>
+								<item>f256 - mpfr</item>
+								<item>f512 - mpfr</item>
+								<item>f1024 - mpfr</item>
+								<item>f2048 - mpfr</item>
+								<item>f4096 - mpfr</item>
+							</content>
+							<selection>1</selection>
+							<tooltip>precision</tooltip>
+							<handler function="OnchEngineSelect" entry="EVT_CHOICE" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+					</object>
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL2" variable="scResolution" member="yes">
+							<value>1024</value>
+							<min>256</min>
+							<max>8192</max>
+							<tooltip>export resolution</tooltip>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+					</object>
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
+							<label>bookmarks</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+							<object class="sizeritem">
+								<object class="wxButton" name="ID_BUTTON1" variable="btAddBk" member="yes">
+									<label>+</label>
+									<size>40,-1</size>
+									<handler function="OnbtAddBkClick" entry="EVT_BUTTON" />
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+							</object>
+							<object class="sizeritem">
+								<object class="wxButton" name="ID_BUTTON2" variable="btDelBk" member="yes">
+									<label>-</label>
+									<size>40,-1</size>
+									<handler function="OnbtDelBkClick" entry="EVT_BUTTON" />
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+							</object>
+							<object class="sizeritem">
+								<object class="wxButton" name="ID_BUTTON3" variable="btClearBk" member="yes">
+									<label>clear</label>
+									<size>60,-1</size>
+									<handler function="OnbtClearBkClick" entry="EVT_BUTTON" />
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+							</object>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+					</object>
+					<object class="sizeritem">
+						<object class="wxListBox" name="ID_LISTBOX1" variable="lbBookMarks" member="yes">
+							<default>-1</default>
+							<handler function="OnlbBookMarksSelect" entry="EVT_LISTBOX" />
+						</object>
+						<flag>wxEXPAND</flag>
+						<option>3</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+			</object>
+			<object class="sizeritem">
+				<object class="wxPanel" name="ID_PANEL1" subclass="wxImagePanel" variable="ImagePanel" member="yes">
+					<size>563,477</size>
+					<bg>wxSYS_COLOUR_HIGHLIGHT</bg>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<option>1</option>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
+			<fields>1</fields>
+			<widths>-10</widths>
+			<styles>wxSB_NORMAL</styles>
+		</object>
+		<object class="wxToolBar" name="ID_TOOLBAR1" variable="ToolBar1" member="yes">
+			<object class="tool" name="ID_TOOLBARITEM1" variable="tbReset" member="yes">
+				<label>reset</label>
+				<bitmap stock_id="wxART_NEW" />
+				<handler function="OntbResetClicked" entry="EVT_TOOL" />
+			</object>
+			<object class="tool" name="ID_TOOLBARITEM2" variable="tbExport" member="yes">
+				<label>export</label>
+				<bitmap stock_id="wxART_GO_FORWARD" />
+				<handler function="OntbExportClicked" entry="EVT_TOOL" />
+			</object>
+		</object>
+		<object class="wxImageList" variable="ImageList1" member="yes">
+			<image_list>
+				<item>16</item>
+				<item>16</item>
+			</image_list>
+			<image_text>
+				<item2>16</item2>
+				<item2>16</item2>
+			</image_text>
+		</object>
+		<object class="wxFileDialog" variable="fdExport" member="yes">
+			<message>export file</message>
+			<wildcard>*.png</wildcard>
+			<style>wxFD_SAVE</style>
+		</object>
+	</object>
+</wxsmith>
