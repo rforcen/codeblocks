@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="polygonizerFrame">
+		<title>Polygonizer</title>
+		<size>690,442</size>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+							<orient>wxVERTICAL</orient>
+							<object class="sizeritem">
+								<object class="wxSpinCtrl" name="ID_SPINCTRL1" variable="scResol" member="yes">
+									<value>80</value>
+									<min>20</min>
+									<max>300</max>
+									<size>126,34</size>
+									<handler function="OnscResolChange" entry="EVT_SPINCTRL" />
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxSpinCtrlDouble" name="ID_SPINCTRLDOUBLE1" variable="scBounds" member="yes">
+									<value>2</value>
+									<min>0.500000</min>
+									<max>10.000000</max>
+									<increment>0.010000</increment>
+									<size>128,34</size>
+									<handler function="OnSpinCtrlDouble1Change" entry="EVT_SPINCTRLDOUBLE" />
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxButton" name="ID_BUTTON1" variable="btnSaveCTM" member="yes">
+									<label>save CTM</label>
+									<handler function="OnbtnSaveCTMClick" entry="EVT_BUTTON" />
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+						</object>
+						<flag>wxALL|wxEXPAND|wxFIXED_MINSIZE</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxListBox" name="ID_LISTBOX1" variable="ListBox1" member="yes">
+							<default>-1</default>
+							<size>250,340</size>
+							<handler function="OnListBox1Select" entry="EVT_LISTBOX" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxGLCanvas" name="ID_GLCANVAS1" subclass="RenderPoly" variable="GLCanvas1" member="yes">
+					<mLevel>4294967296</mLevel>
+					<mMinAlpha>68719476736</mMinAlpha>
+					<mDepthSize>16</mDepthSize>
+					<size>319,404</size>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>2</option>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
+			<fields>1</fields>
+			<widths>-1</widths>
+			<styles>wxSB_NORMAL</styles>
+		</object>
+	</object>
+</wxsmith>
