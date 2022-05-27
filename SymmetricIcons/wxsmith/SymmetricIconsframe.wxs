@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="SymmetricIconsFrame">
+		<title>Symmetric Icon</title>
+		<id_arg>0</id_arg>
+		<style>wxDEFAULT_FRAME_STYLE|wxRESIZE_BORDER</style>
+		<handler function="OnClose" entry="EVT_CLOSE" />
+		<handler function="OnPaint" entry="EVT_PAINT" />
+		<handler function="OnResize" entry="EVT_SIZE" />
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL1" variable="nIters" member="yes">
+							<value>2000</value>
+							<min>1</min>
+							<max>10000</max>
+							<size>104,33</size>
+							<tooltip># iters in 1e5</tooltip>
+							<help># iters in 1e5</help>
+							<handler function="OnnItersChange" entry="EVT_SPINCTRL" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON1" variable="saveImage" member="yes">
+							<label>save</label>
+							<size>79,33</size>
+							<handler function="OnsaveImageClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON2" variable="btnStop" member="yes">
+							<label>stop</label>
+							<handler function="OnbtnStopClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>3</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<object class="sizeritem">
+						<object class="wxGrid" name="ID_GRID1" variable="gridPreset" member="yes">
+							<cols>7</cols>
+							<labelcolwidth>0</labelcolwidth>
+							<labelfont>
+								<size>8</size>
+								<style>normal</style>
+								<weight>normal</weight>
+								<underlined>0</underlined>
+								<family>swiss</family>
+								<face>Sans</face>
+							</labelfont>
+							<collabels>
+								<item>lambda</item>
+								<item>alpha</item>
+								<item>beta</item>
+								<item>gamma</item>
+								<item>omega</item>
+								<item>symbol</item>
+								<item>scale</item>
+							</collabels>
+							<size>641,287</size>
+							<font>
+								<size>8</size>
+								<style>normal</style>
+								<weight>normal</weight>
+								<underlined>0</underlined>
+								<family>swiss</family>
+								<face>Sans</face>
+							</font>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+							<object class="sizeritem">
+								<object class="wxGLCanvas" name="ID_GLCANVAS1" subclass="wxGLCanvasSymmIcon" variable="siGLCanvas" member="yes">
+									<mLevel>4294967296</mLevel>
+									<mMinAlpha>68719476736</mMinAlpha>
+									<mDepthSize>16</mDepthSize>
+									<size>354,336</size>
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>2</border>
+								<option>1</option>
+							</object>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>2</border>
+				<option>1</option>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
+			<fields>1</fields>
+			<widths>-1</widths>
+			<styles>wxSB_NORMAL</styles>
+		</object>
+	</object>
+</wxsmith>
