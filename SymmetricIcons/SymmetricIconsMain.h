@@ -40,6 +40,9 @@ class SymmetricIconsFrame: public wxFrame {
 
     bool needsRefresh=true;
     atomic_bool working=false;
+    long iters=0;
+    wxSize bitmapSize;
+    wxString message;
 
     void fillPreset();
     void RePaintAsync(bool refresh=true);

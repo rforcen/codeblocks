@@ -18,6 +18,8 @@
 
 using std::thread;
 
+DECLARE_APP(wxApp)
+
 //(*IdInit(SymmetricIconsFrame)
 const long SymmetricIconsFrame::ID_SPINCTRL1 = wxNewId();
 const long SymmetricIconsFrame::ID_BUTTON1 = wxNewId();
@@ -32,6 +34,7 @@ BEGIN_EVENT_TABLE(SymmetricIconsFrame,wxFrame)
     EVT_GRID_RANGE_SELECT(SymmetricIconsFrame::selectGrid)
     //*)
 END_EVENT_TABLE()
+
 
 SymmetricIconsFrame::SymmetricIconsFrame(wxWindow* parent,wxWindowID id) {
     //(*Initialize(SymmetricIconsFrame)
@@ -74,16 +77,17 @@ SymmetricIconsFrame::SymmetricIconsFrame(wxWindow* parent,wxWindowID id) {
     BoxSizer3->Add(gridPreset, 0, wxALL|wxEXPAND, 2);
     BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
     int GLCanvasAttributes_1[] = {
-    	WX_GL_RGBA,
-    	WX_GL_DOUBLEBUFFER,
-    	WX_GL_DEPTH_SIZE,      16,
-    	WX_GL_STENCIL_SIZE,    0,
-    	0, 0 };
-    #if wxCHECK_VERSION(3,0,0)
-    	siGLCanvas = new wxGLCanvasSymmIcon(this, ID_GLCANVAS1, GLCanvasAttributes_1, wxDefaultPosition, wxSize(354,336), 0, _T("ID_GLCANVAS1"));
-    #else
-    	siGLCanvas = new wxGLCanvasSymmIcon(this, ID_GLCANVAS1, wxDefaultPosition, wxSize(354,336), 0, _T("ID_GLCANVAS1"), GLCanvasAttributes_1);
-    #endif // wxCHECK_VERSION
+        WX_GL_RGBA,
+        WX_GL_DOUBLEBUFFER,
+        WX_GL_DEPTH_SIZE,      16,
+        WX_GL_STENCIL_SIZE,    0,
+        0, 0
+    };
+#if wxCHECK_VERSION(3,0,0)
+    siGLCanvas = new wxGLCanvasSymmIcon(this, ID_GLCANVAS1, GLCanvasAttributes_1, wxDefaultPosition, wxSize(354,336), 0, _T("ID_GLCANVAS1"));
+#else
+    siGLCanvas = new wxGLCanvasSymmIcon(this, ID_GLCANVAS1, wxDefaultPosition, wxSize(354,336), 0, _T("ID_GLCANVAS1"), GLCanvasAttributes_1);
+#endif // wxCHECK_VERSION
     BoxSizer4->Add(siGLCanvas, 1, wxALL|wxEXPAND, 2);
     BoxSizer3->Add(BoxSizer4, 1, wxALL|wxEXPAND, 5);
     BoxSizer1->Add(BoxSizer3, 1, wxALL|wxEXPAND, 2);
@@ -109,6 +113,7 @@ SymmetricIconsFrame::SymmetricIconsFrame(wxWindow* parent,wxWindowID id) {
 
     srand(time(0));
 }
+
 
 SymmetricIconsFrame::~SymmetricIconsFrame() {
     //(*Destroy(SymmetricIconsFrame)
@@ -138,43 +143,44 @@ void SymmetricIconsFrame::fillPreset() {
     }
 }
 
-
-
 void SymmetricIconsFrame::RePaintAsync(bool refresh) {
+
     const long itersDiv=100000;
 
     if (working) return;
 
     auto sr=gridPreset->GetSelectedRows();
     if (refresh && sr.size()>0) {
-        wxSize sz = siGLCanvas->getScaledSize();
-        symmIcon.setSize(sz.x, sz.y);
+        bitmapSize = siGLCanvas->getScaledSize();
+        symmIcon.setSize(bitmapSize.x, bitmapSize.y);
 
         int selIcon=sr[0];
         symmIcon.setPreset(selIcon);
 
-        long iters=nIters->GetValue()*itersDiv;
+        iters=nIters->GetValue()*itersDiv;
         working=true;
 
-        thread([this, iters, selIcon, sz]() {
+        thread([this]() {
             Timer t0;
             for (long i=0; i<iters && working; i++) { // generate
-                if (symmIcon.generateSymmIcon(itersDiv)) { // generate enough iters before updating
-                    auto lap=t0.lap();
-                    CallAfter([this, i, sz, lap]() { // update icon after thread completition
-                        StatusBar1->SetStatusText(wxString::Format("iters:%ld, size(%d, %d), lap:%ldms", (i+1)/itersDiv, sz.x, sz.y, lap));
+
+                // update bitmap  display when done with prev. one and enough iterations have been performed
+                if (wxGetApp().Yield(true) && symmIcon.generateSymmIcon(itersDiv/2)) {
+                    message = wxString::Format("iters:%ld, size(%d, %d), lap:%ldms", (i+1)/itersDiv, bitmapSize.x, bitmapSize.y, t0.lap());
+
+                    CallAfter([=]() { // update icon & status msg
+                        StatusBar1->SetStatusText(message);
                         siGLCanvas->setBitmap(symmIcon.screen);
                     });
-                    wxYieldIfNeeded();
                 }
             }
             working=!working; // ack
             needsRefresh=false;
 
             if (!working) {
-                auto lap=t0.lap();
-                CallAfter([this, iters, sz, lap]() { // update icon after thread completition
-                    StatusBar1->SetStatusText(wxString::Format("iters:%ld, size(%d, %d), lap:%ldms", iters/100000, sz.x, sz.y, lap));
+                message = wxString::Format("iters:%ld, size(%d, %d), lap:%ldms", iters/100000, bitmapSize.x, bitmapSize.y, t0.lap());
+                CallAfter([=]() { // update message
+                    StatusBar1->SetStatusText(message);
                 });
             }
         }).detach();
@@ -197,8 +203,8 @@ void SymmetricIconsFrame::OnnItersChange(wxSpinEvent& event) {
 void SymmetricIconsFrame::OnsaveImageClick(wxCommandEvent& event) {
     StopWorking();
 
-    wxSize sz = siGLCanvas->getScaledSize();
-    wxBitmap bmp=genImage(sz.x, sz.y, symmIcon.screen);
+    wxSize bitmapSize = siGLCanvas->getScaledSize();
+    wxBitmap bmp=genImage(bitmapSize.x, bitmapSize.y, symmIcon.screen);
     bmp.SaveFile("symmIcon.png", wxBITMAP_TYPE_PNG);
 
 
@@ -216,6 +222,7 @@ void SymmetricIconsFrame::StopWorking() {
         while (!working); // wait ack
         wxYieldIfNeeded();
         working=false;
+        wxMicroSleep(10000);
     }
 }
 
