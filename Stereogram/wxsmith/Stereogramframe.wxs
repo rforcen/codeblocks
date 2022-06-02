@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="StereogramFrame">
+		<title>Stereographs</title>
+		<size>646,451</size>
+		<handler function="OnPaint" entry="EVT_PAINT" />
+		<handler function="OnResize" entry="EVT_SIZE" />
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL1" variable="scWidth" member="yes">
+							<value>3840</value>
+							<min>1024</min>
+							<max>8192</max>
+							<size>104,32</size>
+							<tooltip>image width</tooltip>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL2" variable="scHeight" member="yes">
+							<value>2160</value>
+							<min>1024</min>
+							<max>8192</max>
+							<size>104,32</size>
+							<tooltip>image height</tooltip>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON1" variable="btnSave" member="yes">
+							<label>save</label>
+							<handler function="OnbtnSaveClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>2</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<object class="sizeritem">
+						<object class="wxListCtrl" name="ID_LISTCTRL2" variable="lcTextures" member="yes">
+							<size>64,380</size>
+							<font>
+								<size>31</size>
+								<style>normal</style>
+								<weight>normal</weight>
+								<underlined>0</underlined>
+								<family>swiss</family>
+								<face>Sans</face>
+							</font>
+							<style>wxLC_LIST|wxLC_REPORT|wxLC_ICON|wxLC_NO_HEADER|wxLC_SINGLE_SEL|wxLC_VRULES|wxBORDER_SIMPLE|wxVSCROLL</style>
+							<handler function="OnlcTexturesItemSelect" entry="EVT_LIST_ITEM_SELECTED" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxListCtrl" name="ID_LISTCTRL1" variable="lcMask" member="yes">
+							<size>64,380</size>
+							<font>
+								<size>31</size>
+								<style>normal</style>
+								<weight>normal</weight>
+								<underlined>0</underlined>
+								<family>swiss</family>
+								<face>Sans</face>
+							</font>
+							<style>wxLC_LIST|wxLC_REPORT|wxLC_ICON|wxLC_NO_HEADER|wxLC_SINGLE_SEL|wxLC_VRULES|wxBORDER_SIMPLE|wxVSCROLL</style>
+							<handler function="OnlcMaskItemSelect" entry="EVT_LIST_ITEM_SELECTED" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxStaticBitmap" name="ID_STATICBITMAP1" variable="uiBmp" member="yes">
+							<size>355,380</size>
+							<style>wxBORDER_SIMPLE</style>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
+			<fields>1</fields>
+			<widths>-1</widths>
+			<styles>wxSB_NORMAL</styles>
+		</object>
+		<object class="wxImageList" variable="imgListTextures" member="yes">
+			<image_list>
+				<item>64</item>
+				<item>64</item>
+			</image_list>
+			<image_text>
+				<item2>64</item2>
+				<item2>64</item2>
+			</image_text>
+			<image_width>64</image_width>
+			<image_height>64</image_height>
+		</object>
+		<object class="wxImageList" variable="imgListMask" member="yes">
+			<image_list>
+				<item>64</item>
+				<item>64</item>
+			</image_list>
+			<image_text>
+				<item2>64</item2>
+				<item2>64</item2>
+			</image_text>
+			<image_width>64</image_width>
+			<image_height>64</image_height>
+		</object>
+	</object>
+</wxsmith>
