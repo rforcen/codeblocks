@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="vbsFrame">
+		<title>VBS</title>
+		<centered>1</centered>
+		<size>419,430</size>
+		<id_arg>0</id_arg>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxDirPickerCtrl" name="ID_DIRPICKERCTRL1" variable="dpWavFiles" member="yes">
+							<message></message>
+							<bg>#C0DCC0</bg>
+							<handler function="OndpWavFilesDirChanged" entry="EVT_DIRPICKER_CHANGED" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxCheckBox" name="ID_CHECKBOX1" variable="cbAutoPlay" member="yes">
+							<label>autoplay</label>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxListBox" name="ID_LISTBOX1" variable="lbWavFiles" member="yes">
+							<default>-1</default>
+							<size>180,291</size>
+							<handler function="OnlbWavFilesSelect" entry="EVT_LISTBOX" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>2</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+							<object class="sizeritem">
+								<object class="wxBoxSizer" variable="BoxSizer7" member="no">
+									<orient>wxVERTICAL</orient>
+									<object class="sizeritem">
+										<object class="wxStaticText" name="ID_STATICTEXT4" variable="StaticText4" member="yes">
+											<label>radial spectrum</label>
+											<fg>wxSYS_COLOUR_BACKGROUND</fg>
+											<bg>wxSYS_COLOUR_HIGHLIGHT</bg>
+											<style>wxALIGN_CENTRE</style>
+										</object>
+										<flag>wxALL|wxEXPAND</flag>
+									</object>
+									<object class="sizeritem">
+										<object class="wxNotebook" name="ID_NOTEBOOK1" variable="Notebook1" member="yes">
+											<object class="notebookpage">
+												<object class="wxPanel" name="ID_RADIAL" subclass="WavGraph" variable="radialGraph" member="yes">
+													<pos>2,251</pos>
+													<size>426,507</size>
+												</object>
+												<label>radial</label>
+											</object>
+											<object class="notebookpage">
+												<object class="wxPanel" name="ID_SPIRAL" subclass="WavGraph" variable="spiralGraph" member="yes" />
+												<label>spiral</label>
+											</object>
+										</object>
+										<flag>wxALL|wxEXPAND</flag>
+										<border>2</border>
+										<option>1</option>
+									</object>
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>2</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxBoxSizer" variable="BoxSizer6" member="no">
+									<orient>wxVERTICAL</orient>
+									<object class="sizeritem">
+										<object class="wxStaticText" name="ID_STATICTEXT3" variable="StaticText3" member="yes">
+											<label>music matrix</label>
+											<fg>wxSYS_COLOUR_BACKGROUND</fg>
+											<bg>wxSYS_COLOUR_HIGHLIGHT</bg>
+											<style>wxALIGN_CENTRE</style>
+										</object>
+										<flag>wxALL|wxEXPAND</flag>
+									</object>
+									<object class="sizeritem">
+										<object class="wxGrid" name="ID_GRID1" variable="musicMatrix" member="yes">
+											<cols>13</cols>
+											<rows>6</rows>
+											<readonly>1</readonly>
+											<labelcolwidth>40</labelcolwidth>
+											<defaultcolsize>35</defaultcolsize>
+											<labeltextcolour>wxSYS_COLOUR_WINDOWTEXT</labeltextcolour>
+											<collabels>
+												<item>A</item>
+												<item>A#</item>
+												<item>B</item>
+												<item>C</item>
+												<item>C#</item>
+												<item>D</item>
+												<item>D#</item>
+												<item>E</item>
+												<item>F</item>
+												<item>F#</item>
+												<item>G</item>
+												<item>G#</item>
+												<item>Sum</item>
+											</collabels>
+											<rowlabels>
+												<item>-2</item>
+												<item>-1</item>
+												<item> 0</item>
+												<item>+1</item>
+												<item>+2</item>
+												<item>sum</item>
+											</rowlabels>
+											<bg>#C0DCC0</bg>
+											<font>
+												<size>11</size>
+												<style>normal</style>
+												<weight>normal</weight>
+												<underlined>0</underlined>
+												<family>teletype</family>
+												<face>Monospace</face>
+											</font>
+										</object>
+										<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+										<border>2</border>
+									</object>
+									<object class="sizeritem">
+										<object class="wxPanel" name="ID_MMGRAPH" subclass="WavGraph" variable="mmGraph" member="yes">
+											<size>608,62</size>
+										</object>
+										<flag>wxALL|wxEXPAND</flag>
+										<border>2</border>
+									</object>
+									<object class="sizeritem">
+										<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
+											<label>spectrum</label>
+											<fg>wxSYS_COLOUR_BACKGROUND</fg>
+											<bg>wxSYS_COLOUR_HIGHLIGHT</bg>
+											<style>wxALIGN_CENTRE</style>
+										</object>
+										<flag>wxALL|wxEXPAND</flag>
+									</object>
+									<object class="sizeritem">
+										<object class="wxBoxSizer" variable="BoxSizer8" member="no">
+											<orient>wxVERTICAL</orient>
+											<object class="sizeritem">
+												<object class="wxBoxSizer" variable="BoxSizer9" member="no">
+													<orient>wxVERTICAL</orient>
+													<object class="sizeritem">
+														<object class="wxPanel" name="ID_FFT" subclass="WavGraph" variable="fftGraph" member="yes">
+															<size>600,148</size>
+															<tooltip>fft</tooltip>
+														</object>
+														<flag>wxALL|wxEXPAND</flag>
+														<border>2</border>
+														<option>1</option>
+													</object>
+												</object>
+												<flag>wxALL|wxEXPAND</flag>
+												<border>2</border>
+												<option>1</option>
+											</object>
+											<object class="sizeritem">
+												<object class="wxBoxSizer" variable="BoxSizer10" member="no">
+													<object class="sizeritem">
+														<object class="wxBoxSizer" variable="BoxSizer11" member="no">
+															<orient>wxVERTICAL</orient>
+															<object class="sizeritem">
+																<object class="wxStaticText" name="ID_STATICTEXT6" variable="StaticText5" member="yes">
+																	<label>signal params</label>
+																	<fg>wxSYS_COLOUR_BACKGROUND</fg>
+																	<bg>wxSYS_COLOUR_MENUHILIGHT</bg>
+																	<style>wxALIGN_CENTRE|wxBORDER_RAISED</style>
+																</object>
+																<flag>wxALL|wxEXPAND</flag>
+															</object>
+															<object class="sizeritem">
+																<object class="wxListBox" name="ID_LISTBOX2" variable="lbSignal" member="yes">
+																	<default>-1</default>
+																	<bg>#C0DCC0</bg>
+																</object>
+																<flag>wxALL|wxEXPAND</flag>
+																<option>1</option>
+															</object>
+														</object>
+														<flag>wxALL|wxEXPAND</flag>
+														<border>2</border>
+														<option>1</option>
+													</object>
+													<object class="sizeritem">
+														<object class="wxBoxSizer" variable="BoxSizer12" member="no">
+															<orient>wxVERTICAL</orient>
+															<object class="sizeritem">
+																<object class="wxStaticText" name="ID_STATICTEXT5" variable="StaticText1" member="yes">
+																	<label>formants</label>
+																	<fg>wxSYS_COLOUR_BACKGROUND</fg>
+																	<bg>wxSYS_COLOUR_MENUHILIGHT</bg>
+																	<style>wxALIGN_CENTRE|wxBORDER_RAISED</style>
+																</object>
+																<flag>wxALL|wxEXPAND</flag>
+															</object>
+															<object class="sizeritem">
+																<object class="wxButton" name="ID_BUTTON1" variable="btnPlayFormants" member="yes">
+																	<label>play</label>
+																	<handler function="OnbtnPlayFormantsClick" entry="EVT_BUTTON" />
+																</object>
+																<flag>wxALL|wxEXPAND</flag>
+																<option>1</option>
+															</object>
+															<object class="sizeritem">
+																<object class="wxBoxSizer" variable="BoxSizer13" member="no">
+																	<object class="sizeritem">
+																		<object class="wxSlider" name="ID_SLIDER1" variable="slVolume" member="yes">
+																			<value>30</value>
+																			<font>
+																				<size>9</size>
+																				<style>normal</style>
+																				<weight>normal</weight>
+																				<underlined>0</underlined>
+																				<family>swiss</family>
+																				<face>Sans</face>
+																			</font>
+																			<tooltip>formants vol.</tooltip>
+																			<style>wxSL_VERTICAL|wxSL_LABELS</style>
+																		</object>
+																		<flag>wxALL|wxEXPAND</flag>
+																		<option>1</option>
+																	</object>
+																	<object class="sizeritem">
+																		<object class="wxSlider" name="ID_SLIDER2" variable="slBinSepp" member="yes">
+																			<value>15</value>
+																			<font>
+																				<size>9</size>
+																				<style>normal</style>
+																				<weight>normal</weight>
+																				<underlined>0</underlined>
+																				<family>swiss</family>
+																				<face>Sans</face>
+																			</font>
+																			<tooltip>binaural sepparation</tooltip>
+																			<style>wxSL_VERTICAL|wxSL_LABELS</style>
+																		</object>
+																		<flag>wxALL|wxEXPAND</flag>
+																	</object>
+																	<object class="sizeritem">
+																		<object class="wxGrid" name="ID_GRID2" variable="gridFormants" member="yes">
+																			<cols>2</cols>
+																			<rows>5</rows>
+																			<readonly>1</readonly>
+																			<collabels>
+																				<item>db</item>
+																				<item>hz</item>
+																			</collabels>
+																			<font>
+																				<size>8</size>
+																				<style>normal</style>
+																				<weight>normal</weight>
+																				<underlined>0</underlined>
+																				<family>swiss</family>
+																				<face>Sans</face>
+																			</font>
+																			<handler function="OngridFormantsCellLeftClick" entry="EVT_CMD_GRID_CELL_LEFT_CLICK" />
+																		</object>
+																		<flag>wxALL|wxEXPAND</flag>
+																	</object>
+																</object>
+																<flag>wxALL|wxEXPAND</flag>
+															</object>
+														</object>
+														<flag>wxALL|wxEXPAND</flag>
+														<border>2</border>
+													</object>
+												</object>
+												<flag>wxALL|wxEXPAND</flag>
+												<border>2</border>
+												<option>1</option>
+											</object>
+										</object>
+										<flag>wxALL|wxEXPAND</flag>
+										<border>2</border>
+										<option>1</option>
+									</object>
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>2</border>
+								<option>1</option>
+							</object>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer5" member="no">
+							<orient>wxVERTICAL</orient>
+							<object class="sizeritem">
+								<object class="wxStaticText" name="ID_STATICTEXT1" variable="stSignal" member="yes">
+									<label>signal</label>
+									<fg>wxSYS_COLOUR_BACKGROUND</fg>
+									<bg>wxSYS_COLOUR_MENUHILIGHT</bg>
+									<style>wxALIGN_CENTRE|wxBORDER_RAISED</style>
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+							</object>
+							<object class="sizeritem">
+								<object class="wxPanel" name="ID_SIGNAL" subclass="WavGraph" variable="wavGraph" member="yes">
+									<size>1228,57</size>
+									<tooltip>signal</tooltip>
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>2</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxPanel" name="ID_SPECTROGRAM" subclass="WavGraph" variable="spectrogramGraph" member="yes" />
+								<flag>wxEXPAND</flag>
+								<option>1</option>
+							</object>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>2</border>
+				<option>1</option>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
+			<fields>1</fields>
+			<widths>-1</widths>
+			<styles>wxSB_NORMAL</styles>
+		</object>
+		<object class="wxDirDialog" variable="DirDialog1" member="yes">
+			<message>Select directory</message>
+		</object>
+	</object>
+</wxsmith>

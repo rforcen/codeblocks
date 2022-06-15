@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="vbs" />
+		<Option pch_mode="0" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/vbs" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/vbs" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="`wx-config --cflags`" />
+			<Add option="-Winvalid-pch" />
+			<Add option="-include wx_pch.h" />
+			<Add option="-DWX_PRECOMP" />
+		</Compiler>
+		<Linker>
+			<Add option="`wx-config --libs` -lportaudio" />
+		</Linker>
+		<Unit filename="include/Audio.h" />
+		<Unit filename="include/ColorIndex.h" />
+		<Unit filename="include/ColorScale.h" />
+		<Unit filename="include/WavGraph.h" />
+		<Unit filename="include/common.cpp" />
+		<Unit filename="include/common.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="include/dr_wav.h" />
+		<Unit filename="include/fft.h" />
+		<Unit filename="src/ColorIndex.cpp" />
+		<Unit filename="src/ColorScale.cpp" />
+		<Unit filename="src/WavGraph.cpp" />
+		<Unit filename="src/fft.cpp" />
+		<Unit filename="vbsApp.cpp" />
+		<Unit filename="vbsApp.h" />
+		<Unit filename="vbsMain.cpp" />
+		<Unit filename="vbsMain.h" />
+		<Unit filename="wx_pch.h">
+			<Option compile="1" />
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="wxsmith/vbsframe.wxs" />
+		<Extensions>
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="vbsApp.cpp" main="vbsFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/vbsframe.wxs" src="vbsMain.cpp" hdr="vbsMain.h" fwddecl="0" i18n="1" name="vbsFrame" language="CPP" />
+				</resources>
+			</wxsmith>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
