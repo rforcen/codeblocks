@@ -1856,3 +1856,173 @@
 1655200203 /home/asd/Code/cb/vbs/include/Audio.h
 	<portaudio.h>
 
+1654670329 source:/home/asd/Code/codeblocks/vbs/wx_pch.h
+	<wx/wxprec.h>
+	<wx/wx.h>
+
+1654935551 source:/home/asd/Code/codeblocks/vbs/include/common.cpp
+	"common.h"
+	"dr_wav.h"
+
+1655973093 /home/asd/Code/codeblocks/vbs/include/common.h
+	"dr_wav.h"
+	"fft.h"
+	<vector>
+	<string>
+	<algorithm>
+	<functional>
+	"ColorIndex.h"
+
+1635068283 /home/asd/Code/codeblocks/vbs/include/dr_wav.h
+	"dr_wav.h"
+	<stddef.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	<stdio.h>
+	<wchar.h>
+	<assert.h>
+	<errno.h>
+
+1654678422 /home/asd/Code/codeblocks/vbs/include/fft.h
+
+1655109528 /home/asd/Code/codeblocks/vbs/include/ColorIndex.h
+	"ColorScale.h"
+
+1655109548 /home/asd/Code/codeblocks/vbs/include/ColorScale.h
+
+1491237776 source:/home/asd/Code/codeblocks/vbs/src/ColorIndex.cpp
+	"ColorIndex.h"
+
+1574762199 source:/home/asd/Code/codeblocks/vbs/src/ColorScale.cpp
+	"ColorScale.h"
+
+1655139721 source:/home/asd/Code/codeblocks/vbs/src/fft.cpp
+	"fft.h"
+	<math.h>
+	<stdlib.h>
+	<cfloat>
+	<cstring>
+
+1654673910 source:/home/asd/Code/codeblocks/vbs/src/WavGraph.cpp
+	"WavGraph.h"
+
+1655971799 /home/asd/Code/codeblocks/vbs/include/WavGraph.h
+	<wx/wx.h>
+	<wx/grid.h>
+	<wx/panel.h>
+	<functional>
+	<map>
+	"common.h"
+	"graphs.h"
+
+1654670329 source:/home/asd/Code/codeblocks/vbs/vbsApp.cpp
+	"wx_pch.h"
+	"vbsApp.h"
+	"vbsMain.h"
+	<wx/image.h>
+
+1654670329 /home/asd/Code/codeblocks/vbs/wx_pch.h
+	<wx/wxprec.h>
+	<wx/wx.h>
+
+1654670329 /home/asd/Code/codeblocks/vbs/vbsApp.h
+	<wx/app.h>
+
+1655973718 /home/asd/Code/codeblocks/vbs/vbsMain.h
+	<wx/button.h>
+	<wx/checkbox.h>
+	<wx/choice.h>
+	<wx/dirdlg.h>
+	<wx/filepicker.h>
+	<wx/frame.h>
+	<wx/glcanvas.h>
+	<wx/grid.h>
+	<wx/listbox.h>
+	<wx/sizer.h>
+	<wx/slider.h>
+	<wx/stattext.h>
+	<wx/statusbr.h>
+	<wx/tglbtn.h>
+	<wx/persist/toplevel.h>
+	"common.h"
+	"WavGraph.h"
+	"wxGLGraph.h"
+	"Audio.h"
+
+1655627943 /home/asd/Code/codeblocks/vbs/include/Audio.h
+	<portaudio.h>
+	<functional>
+
+1656055936 source:/home/asd/Code/codeblocks/vbs/vbsMain.cpp
+	"wx_pch.h"
+	<wx/msgdlg.h>
+	<wx/dir.h>
+	"vbsMain.h"
+
+1641377446 /usr/include/wx-3.0/wx/tglbtn.h
+	"wx/defs.h"
+	"wx/event.h"
+	"wx/anybutton.h"
+	"wx/univ/tglbtn.h"
+	"wx/msw/tglbtn.h"
+	"wx/gtk/tglbtn.h"
+	"wx/gtk1/tglbtn.h"
+	"wx/motif/tglbtn.h"
+	"wx/osx/tglbtn.h"
+	"wx/os2/tglbtn.h"
+
+1641377446 /usr/include/wx-3.0/wx/gtk/tglbtn.h
+	"wx/bitmap.h"
+
+1655820296 source:/home/asd/Code/codeblocks/vbs/wxGLImage.cpp
+	<wx/rawbmp.h>
+	"wxGLImage.h"
+	<vector>
+	<functional>
+
+1641377446 /usr/include/wx-3.0/wx/rawbmp.h
+	"wx/defs.h"
+	"wx/image.h"
+	"wx/bitmap.h"
+
+1655972570 /home/asd/Code/codeblocks/vbs/wxGLImage.h
+	<wx/wx.h>
+	<wx/glcanvas.h>
+	<wx/grid.h>
+	<vector>
+
+1641377446 /usr/include/wx-3.0/wx/glcanvas.h
+	"wx/defs.h"
+	"wx/app.h"
+	"wx/palette.h"
+	"wx/window.h"
+	"wx/msw/glcanvas.h"
+	"wx/x11/glcanvas.h"
+	"wx/gtk/glcanvas.h"
+	"wx/gtk1/glcanvas.h"
+	"wx/osx/glcanvas.h"
+	"wx/cocoa/glcanvas.h"
+
+1641377446 /usr/include/wx-3.0/wx/gtk/glcanvas.h
+	"wx/unix/glx11.h"
+
+1641377446 /usr/include/wx-3.0/wx/unix/glx11.h
+	<GL/glx.h>
+
+1641377446 /usr/include/wx-3.0/wx/splitter.h
+	"wx/event.h"
+	"wx/generic/splitter.h"
+
+1641377446 /usr/include/wx-3.0/wx/generic/splitter.h
+	"wx/window.h"
+	"wx/containr.h"
+
+1655972013 /home/asd/Code/codeblocks/vbs/wxGLGraph.h
+	"wxGLImage.h"
+	<functional>
+	"graphs.h"
+
+1656056296 /home/asd/Code/codeblocks/vbs/include/graphs.h
+	"common.h"
+

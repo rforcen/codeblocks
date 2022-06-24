@@ -19,6 +19,21 @@
 						<border>2</border>
 					</object>
 					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer14" member="no">
+							<object class="sizeritem">
+								<object class="wxToggleButton" name="ID_TOGGLEBUTTON1" variable="tbPlay" member="yes">
+									<label>play</label>
+									<handler function="OntbPlayToggle" entry="EVT_TOGGLEBUTTON" />
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_CHECKBOX1" variable="cbAutoPlay" member="yes">
 							<label>autoplay</label>
 						</object>
@@ -33,6 +48,23 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>2</border>
+						<option>2</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT6" variable="StaticText5" member="yes">
+							<label>signal params</label>
+							<fg>wxSYS_COLOUR_BACKGROUND</fg>
+							<bg>wxSYS_COLOUR_MENUHILIGHT</bg>
+							<style>wxALIGN_CENTRE|wxBORDER_RAISED</style>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+					</object>
+					<object class="sizeritem">
+						<object class="wxListBox" name="ID_LISTBOX2" variable="lbSignal" member="yes">
+							<default>-1</default>
+							<bg>#C0DCC0</bg>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
 						<option>1</option>
 					</object>
 				</object>
@@ -55,28 +87,58 @@
 											<style>wxALIGN_CENTRE</style>
 										</object>
 										<flag>wxALL|wxEXPAND</flag>
+										<border>2</border>
 									</object>
 									<object class="sizeritem">
-										<object class="wxNotebook" name="ID_NOTEBOOK1" variable="Notebook1" member="yes">
-											<object class="notebookpage">
-												<object class="wxPanel" name="ID_RADIAL" subclass="WavGraph" variable="radialGraph" member="yes">
-													<pos>2,251</pos>
-													<size>426,507</size>
+										<object class="wxBoxSizer" variable="BoxSizer15" member="no">
+											<object class="sizeritem">
+												<object class="wxChoice" name="ID_CHOICE2" variable="chGraphType" member="yes">
+													<content>
+														<item>radial</item>
+														<item>spiral</item>
+														<item>concentric</item>
+													</content>
+													<selection>2</selection>
+													<handler function="OnchGraphTypeSelect" entry="EVT_CHOICE" />
 												</object>
-												<label>radial</label>
+												<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+												<border>5</border>
+												<option>1</option>
 											</object>
-											<object class="notebookpage">
-												<object class="wxPanel" name="ID_SPIRAL" subclass="WavGraph" variable="spiralGraph" member="yes" />
-												<label>spiral</label>
+											<object class="sizeritem">
+												<object class="wxChoice" name="ID_CHOICE1" variable="fftValues" member="yes">
+													<content>
+														<item>256</item>
+														<item>512</item>
+														<item>1024</item>
+														<item>2048</item>
+														<item>4096</item>
+														<item>8192</item>
+														<item>16384</item>
+														<item>32768</item>
+														<item>65536</item>
+													</content>
+													<selection>5</selection>
+												</object>
+												<flag>wxALL|wxEXPAND</flag>
+												<border>5</border>
+												<option>1</option>
 											</object>
 										</object>
 										<flag>wxALL|wxEXPAND</flag>
 										<border>2</border>
+									</object>
+									<object class="sizeritem">
+										<object class="wxGLCanvas" name="ID_GLCANVAS3" subclass="wxGLGraph" variable="graphGL" member="yes">
+											<mLevel>4294967296</mLevel>
+											<mMinAlpha>68719476736</mMinAlpha>
+											<mDepthSize>16</mDepthSize>
+										</object>
+										<flag>wxALL|wxEXPAND</flag>
 										<option>1</option>
 									</object>
 								</object>
 								<flag>wxALL|wxEXPAND</flag>
-								<border>2</border>
 								<option>1</option>
 							</object>
 							<object class="sizeritem">
@@ -136,11 +198,13 @@
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
-										<object class="wxPanel" name="ID_MMGRAPH" subclass="WavGraph" variable="mmGraph" member="yes">
-											<size>608,62</size>
+										<object class="wxGLCanvas" name="ID_GLCANVAS4" subclass="wxGLGraph" variable="mmGraph" member="yes">
+											<mLevel>4294967296</mLevel>
+											<mMinAlpha>68719476736</mMinAlpha>
+											<mDepthSize>16</mDepthSize>
+											<size>612,73</size>
 										</object>
 										<flag>wxALL|wxEXPAND</flag>
-										<border>2</border>
 									</object>
 									<object class="sizeritem">
 										<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
@@ -158,46 +222,38 @@
 												<object class="wxBoxSizer" variable="BoxSizer9" member="no">
 													<orient>wxVERTICAL</orient>
 													<object class="sizeritem">
-														<object class="wxPanel" name="ID_FFT" subclass="WavGraph" variable="fftGraph" member="yes">
-															<size>600,148</size>
-															<tooltip>fft</tooltip>
+														<object class="wxGLCanvas" name="ID_FFT_GRAPH0" subclass="wxGLGraph" variable="fftGraph0" member="yes">
+															<mLevel>4294967296</mLevel>
+															<mMinAlpha>68719476736</mMinAlpha>
+															<mDepthSize>16</mDepthSize>
 														</object>
 														<flag>wxALL|wxEXPAND</flag>
-														<border>2</border>
+														<option>1</option>
+													</object>
+													<object class="sizeritem">
+														<object class="wxGLCanvas" name="ID_FFT_GRAPH1" subclass="wxGLGraph" variable="fftGraph1" member="yes">
+															<mLevel>4294967296</mLevel>
+															<mMinAlpha>68719476736</mMinAlpha>
+															<mDepthSize>16</mDepthSize>
+														</object>
+														<flag>wxALL|wxEXPAND</flag>
+														<option>1</option>
+													</object>
+													<object class="sizeritem">
+														<object class="wxGLCanvas" name="ID_FFT_GRAPH2" subclass="wxGLGraph" variable="fftGraph2" member="yes">
+															<mLevel>4294967296</mLevel>
+															<mMinAlpha>68719476736</mMinAlpha>
+															<mDepthSize>16</mDepthSize>
+														</object>
+														<flag>wxALL|wxEXPAND</flag>
 														<option>1</option>
 													</object>
 												</object>
 												<flag>wxALL|wxEXPAND</flag>
-												<border>2</border>
 												<option>1</option>
 											</object>
 											<object class="sizeritem">
 												<object class="wxBoxSizer" variable="BoxSizer10" member="no">
-													<object class="sizeritem">
-														<object class="wxBoxSizer" variable="BoxSizer11" member="no">
-															<orient>wxVERTICAL</orient>
-															<object class="sizeritem">
-																<object class="wxStaticText" name="ID_STATICTEXT6" variable="StaticText5" member="yes">
-																	<label>signal params</label>
-																	<fg>wxSYS_COLOUR_BACKGROUND</fg>
-																	<bg>wxSYS_COLOUR_MENUHILIGHT</bg>
-																	<style>wxALIGN_CENTRE|wxBORDER_RAISED</style>
-																</object>
-																<flag>wxALL|wxEXPAND</flag>
-															</object>
-															<object class="sizeritem">
-																<object class="wxListBox" name="ID_LISTBOX2" variable="lbSignal" member="yes">
-																	<default>-1</default>
-																	<bg>#C0DCC0</bg>
-																</object>
-																<flag>wxALL|wxEXPAND</flag>
-																<option>1</option>
-															</object>
-														</object>
-														<flag>wxALL|wxEXPAND</flag>
-														<border>2</border>
-														<option>1</option>
-													</object>
 													<object class="sizeritem">
 														<object class="wxBoxSizer" variable="BoxSizer12" member="no">
 															<orient>wxVERTICAL</orient>
@@ -216,7 +272,6 @@
 																	<handler function="OnbtnPlayFormantsClick" entry="EVT_BUTTON" />
 																</object>
 																<flag>wxALL|wxEXPAND</flag>
-																<option>1</option>
 															</object>
 															<object class="sizeritem">
 																<object class="wxBoxSizer" variable="BoxSizer13" member="no">
@@ -235,7 +290,6 @@
 																			<style>wxSL_VERTICAL|wxSL_LABELS</style>
 																		</object>
 																		<flag>wxALL|wxEXPAND</flag>
-																		<option>1</option>
 																	</object>
 																	<object class="sizeritem">
 																		<object class="wxSlider" name="ID_SLIDER2" variable="slBinSepp" member="yes">
@@ -249,7 +303,7 @@
 																				<face>Sans</face>
 																			</font>
 																			<tooltip>binaural sepparation</tooltip>
-																			<style>wxSL_VERTICAL|wxSL_LABELS</style>
+																			<style>wxSL_HORIZONTAL|wxSL_VERTICAL|wxSL_LABELS</style>
 																		</object>
 																		<flag>wxALL|wxEXPAND</flag>
 																	</object>
@@ -272,7 +326,8 @@
 																			</font>
 																			<handler function="OngridFormantsCellLeftClick" entry="EVT_CMD_GRID_CELL_LEFT_CLICK" />
 																		</object>
-																		<flag>wxALL|wxEXPAND</flag>
+																		<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																		<option>1</option>
 																	</object>
 																</object>
 																<flag>wxALL|wxEXPAND</flag>
@@ -280,6 +335,7 @@
 														</object>
 														<flag>wxALL|wxEXPAND</flag>
 														<border>2</border>
+														<option>1</option>
 													</object>
 												</object>
 												<flag>wxALL|wxEXPAND</flag>
@@ -288,7 +344,6 @@
 											</object>
 										</object>
 										<flag>wxALL|wxEXPAND</flag>
-										<border>2</border>
 										<option>1</option>
 									</object>
 								</object>
@@ -314,17 +369,22 @@
 								<flag>wxALL|wxEXPAND</flag>
 							</object>
 							<object class="sizeritem">
-								<object class="wxPanel" name="ID_SIGNAL" subclass="WavGraph" variable="wavGraph" member="yes">
-									<size>1228,57</size>
-									<tooltip>signal</tooltip>
+								<object class="wxGLCanvas" name="ID_GLCANVAS1" subclass="wxGLGraph" variable="wavGraphGL" member="yes">
+									<mLevel>4294967296</mLevel>
+									<mMinAlpha>68719476736</mMinAlpha>
+									<mDepthSize>16</mDepthSize>
+									<size>1232,60</size>
 								</object>
 								<flag>wxALL|wxEXPAND</flag>
-								<border>2</border>
 								<option>1</option>
 							</object>
 							<object class="sizeritem">
-								<object class="wxPanel" name="ID_SPECTROGRAM" subclass="WavGraph" variable="spectrogramGraph" member="yes" />
-								<flag>wxEXPAND</flag>
+								<object class="wxGLCanvas" name="ID_GLCANVAS2" subclass="wxGLGraph" variable="spectrogramGraphGL" member="yes">
+									<mLevel>4294967296</mLevel>
+									<mMinAlpha>68719476736</mMinAlpha>
+									<mDepthSize>16</mDepthSize>
+								</object>
+								<flag>wxALL|wxEXPAND</flag>
 								<option>1</option>
 							</object>
 						</object>

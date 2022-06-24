@@ -40,7 +40,7 @@
 			<Add option="-DWX_PRECOMP" />
 		</Compiler>
 		<Linker>
-			<Add option="`wx-config --libs` -lportaudio" />
+			<Add option="`wx-config --libs std,gl` -lportaudio -lGL" />
 		</Linker>
 		<Unit filename="include/Audio.h" />
 		<Unit filename="include/ColorIndex.h" />
@@ -52,6 +52,7 @@
 		</Unit>
 		<Unit filename="include/dr_wav.h" />
 		<Unit filename="include/fft.h" />
+		<Unit filename="include/graphs.h" />
 		<Unit filename="src/ColorIndex.cpp" />
 		<Unit filename="src/ColorScale.cpp" />
 		<Unit filename="src/WavGraph.cpp" />
@@ -60,6 +61,9 @@
 		<Unit filename="vbsApp.h" />
 		<Unit filename="vbsMain.cpp" />
 		<Unit filename="vbsMain.h" />
+		<Unit filename="wxGLGraph.h" />
+		<Unit filename="wxGLImage.cpp" />
+		<Unit filename="wxGLImage.h" />
 		<Unit filename="wx_pch.h">
 			<Option compile="1" />
 			<Option weight="0" />

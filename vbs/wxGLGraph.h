@@ -1,25 +1,30 @@
 #pragma once
 
-#include <wx/wx.h>
-#include <wx/grid.h>
-#include <wx/panel.h>
-
+#include "wxGLImage.h"
 #include <functional>
-#include <map>
-
-#include "common.h"
 #include "graphs.h"
 
+using namespace std;
 
-class WavGraph : public wxPanel {
+
+class wxGLGraph : public wxGLImage {
+
+  private:
+    Wave *wav=nullptr;
+    GraphType grType=GRTYPE_SAMPLES;
+
   public:
-    WavGraph(wxWindow *parent,
-             wxWindowID id = wxID_ANY,
-             const wxPoint& pos = wxDefaultPosition,
-             const wxSize& size = wxDefaultSize,
-             long style=wxTB_DEFAULT_STYLE,
-             const wxString& name = "");
-    virtual ~WavGraph();
+    wxGLGraph(wxWindow *parent,
+              wxWindowID id = wxID_ANY,
+              const int *attribList = NULL,
+              const wxPoint& pos = wxDefaultPosition,
+              const wxSize& size = wxDefaultSize,
+              long style = 0,
+              const wxString& name = wxGLCanvasName
+             ): wxGLImage(parent, id, attribList, pos, size, style, name) {}
+
+    ~wxGLGraph() {}
+
 
     void SetWav(Wave*wav, GraphType grType=GRTYPE_SAMPLES) {
         this->wav=wav;
@@ -27,17 +32,8 @@ class WavGraph : public wxPanel {
         Refresh();
     }
 
-  protected:
-
-    void OnPaint(wxPaintEvent&) {
+    void RenderGraph(wxMemoryDC&memDC) override {
         if(wav) {
-            int w,h;
-
-            GetSize(&w, &h);
-
-            wxBitmap bmp(w, h);
-            wxMemoryDC memDC(bmp);
-
             memDC.SetPen(wxPen(*wxCYAN_PEN));
             Graphs grs(&memDC, w,h);
 
@@ -88,17 +84,10 @@ class WavGraph : public wxPanel {
                 break;
             }
 
-            wxPaintDC dc(this); // draw memDC into dc
-            dc.Blit(0, 0, w, h, &memDC, 0, 0);
         }
     }
 
-  private:
-    Wave *wav=nullptr;
-    GraphType grType=GRTYPE_SAMPLES;
 
 
-  protected:
-
-    DECLARE_EVENT_TABLE();
 };
+

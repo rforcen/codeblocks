@@ -16,27 +16,30 @@
 
 //(*IdInit(vbsFrame)
 const long vbsFrame::ID_DIRPICKERCTRL1 = wxNewId();
+const long vbsFrame::ID_TOGGLEBUTTON1 = wxNewId();
 const long vbsFrame::ID_CHECKBOX1 = wxNewId();
 const long vbsFrame::ID_LISTBOX1 = wxNewId();
-const long vbsFrame::ID_STATICTEXT4 = wxNewId();
-const long vbsFrame::ID_RADIAL = wxNewId();
-const long vbsFrame::ID_SPIRAL = wxNewId();
-const long vbsFrame::ID_NOTEBOOK1 = wxNewId();
-const long vbsFrame::ID_STATICTEXT3 = wxNewId();
-const long vbsFrame::ID_GRID1 = wxNewId();
-const long vbsFrame::ID_MMGRAPH = wxNewId();
-const long vbsFrame::ID_STATICTEXT2 = wxNewId();
-const long vbsFrame::ID_FFT = wxNewId();
 const long vbsFrame::ID_STATICTEXT6 = wxNewId();
 const long vbsFrame::ID_LISTBOX2 = wxNewId();
+const long vbsFrame::ID_STATICTEXT4 = wxNewId();
+const long vbsFrame::ID_CHOICE2 = wxNewId();
+const long vbsFrame::ID_CHOICE1 = wxNewId();
+const long vbsFrame::ID_GLCANVAS3 = wxNewId();
+const long vbsFrame::ID_STATICTEXT3 = wxNewId();
+const long vbsFrame::ID_GRID1 = wxNewId();
+const long vbsFrame::ID_GLCANVAS4 = wxNewId();
+const long vbsFrame::ID_STATICTEXT2 = wxNewId();
+const long vbsFrame::ID_FFT_GRAPH0 = wxNewId();
+const long vbsFrame::ID_FFT_GRAPH1 = wxNewId();
+const long vbsFrame::ID_FFT_GRAPH2 = wxNewId();
 const long vbsFrame::ID_STATICTEXT5 = wxNewId();
 const long vbsFrame::ID_BUTTON1 = wxNewId();
 const long vbsFrame::ID_SLIDER1 = wxNewId();
 const long vbsFrame::ID_SLIDER2 = wxNewId();
 const long vbsFrame::ID_GRID2 = wxNewId();
 const long vbsFrame::ID_STATICTEXT1 = wxNewId();
-const long vbsFrame::ID_SIGNAL = wxNewId();
-const long vbsFrame::ID_SPECTROGRAM = wxNewId();
+const long vbsFrame::ID_GLCANVAS1 = wxNewId();
+const long vbsFrame::ID_GLCANVAS2 = wxNewId();
 const long vbsFrame::ID_STATUSBAR1 = wxNewId();
 //*)
 
@@ -48,9 +51,10 @@ END_EVENT_TABLE()
 vbsFrame::vbsFrame(wxWindow* parent,wxWindowID id) {
     //(*Initialize(vbsFrame)
     wxBoxSizer* BoxSizer10;
-    wxBoxSizer* BoxSizer11;
     wxBoxSizer* BoxSizer12;
     wxBoxSizer* BoxSizer13;
+    wxBoxSizer* BoxSizer14;
+    wxBoxSizer* BoxSizer15;
     wxBoxSizer* BoxSizer1;
     wxBoxSizer* BoxSizer2;
     wxBoxSizer* BoxSizer3;
@@ -68,11 +72,22 @@ vbsFrame::vbsFrame(wxWindow* parent,wxWindowID id) {
     dpWavFiles = new wxDirPickerCtrl(this, ID_DIRPICKERCTRL1, wxEmptyString, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDIRP_DIR_MUST_EXIST, wxDefaultValidator, _T("ID_DIRPICKERCTRL1"));
     dpWavFiles->SetBackgroundColour(wxColour(192,220,192));
     BoxSizer2->Add(dpWavFiles, 0, wxALL|wxEXPAND, 2);
+    BoxSizer14 = new wxBoxSizer(wxHORIZONTAL);
+    tbPlay = new wxToggleButton(this, ID_TOGGLEBUTTON1, _("play"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TOGGLEBUTTON1"));
+    BoxSizer14->Add(tbPlay, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer2->Add(BoxSizer14, 0, wxALL|wxEXPAND, 5);
     cbAutoPlay = new wxCheckBox(this, ID_CHECKBOX1, _("autoplay"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX1"));
     cbAutoPlay->SetValue(false);
     BoxSizer2->Add(cbAutoPlay, 0, wxALL|wxEXPAND, 5);
     lbWavFiles = new wxListBox(this, ID_LISTBOX1, wxDefaultPosition, wxSize(180,291), 0, 0, 0, wxDefaultValidator, _T("ID_LISTBOX1"));
-    BoxSizer2->Add(lbWavFiles, 1, wxALL|wxEXPAND, 2);
+    BoxSizer2->Add(lbWavFiles, 2, wxALL|wxEXPAND, 2);
+    StaticText5 = new wxStaticText(this, ID_STATICTEXT6, _("signal params"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE|wxBORDER_RAISED, _T("ID_STATICTEXT6"));
+    StaticText5->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BACKGROUND));
+    StaticText5->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_MENUHILIGHT));
+    BoxSizer2->Add(StaticText5, 0, wxALL|wxEXPAND, 0);
+    lbSignal = new wxListBox(this, ID_LISTBOX2, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_LISTBOX2"));
+    lbSignal->SetBackgroundColour(wxColour(192,220,192));
+    BoxSizer2->Add(lbSignal, 1, wxALL|wxEXPAND, 0);
     BoxSizer1->Add(BoxSizer2, 0, wxALL|wxEXPAND, 2);
     BoxSizer3 = new wxBoxSizer(wxVERTICAL);
     BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
@@ -80,14 +95,38 @@ vbsFrame::vbsFrame(wxWindow* parent,wxWindowID id) {
     StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _("radial spectrum"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE, _T("ID_STATICTEXT4"));
     StaticText4->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BACKGROUND));
     StaticText4->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
-    BoxSizer7->Add(StaticText4, 0, wxALL|wxEXPAND, 0);
-    Notebook1 = new wxNotebook(this, ID_NOTEBOOK1, wxDefaultPosition, wxDefaultSize, 0, _T("ID_NOTEBOOK1"));
-    radialGraph = new WavGraph(Notebook1, ID_RADIAL, wxPoint(2,251), wxSize(426,507), wxTAB_TRAVERSAL, _T("ID_RADIAL"));
-    spiralGraph = new WavGraph(Notebook1, ID_SPIRAL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_SPIRAL"));
-    Notebook1->AddPage(radialGraph, _("radial"), false);
-    Notebook1->AddPage(spiralGraph, _("spiral"), false);
-    BoxSizer7->Add(Notebook1, 1, wxALL|wxEXPAND, 2);
-    BoxSizer4->Add(BoxSizer7, 1, wxALL|wxEXPAND, 2);
+    BoxSizer7->Add(StaticText4, 0, wxALL|wxEXPAND, 2);
+    BoxSizer15 = new wxBoxSizer(wxHORIZONTAL);
+    chGraphType = new wxChoice(this, ID_CHOICE2, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_CHOICE2"));
+    chGraphType->Append(_("radial"));
+    chGraphType->Append(_("spiral"));
+    chGraphType->SetSelection( chGraphType->Append(_("concentric")) );
+    BoxSizer15->Add(chGraphType, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    fftValues = new wxChoice(this, ID_CHOICE1, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_CHOICE1"));
+    fftValues->Append(_("256"));
+    fftValues->Append(_("512"));
+    fftValues->Append(_("1024"));
+    fftValues->Append(_("2048"));
+    fftValues->Append(_("4096"));
+    fftValues->SetSelection( fftValues->Append(_("8192")) );
+    fftValues->Append(_("16384"));
+    fftValues->Append(_("32768"));
+    fftValues->Append(_("65536"));
+    BoxSizer15->Add(fftValues, 1, wxALL|wxEXPAND, 5);
+    BoxSizer7->Add(BoxSizer15, 0, wxALL|wxEXPAND, 2);
+    int GLCanvasAttributes_1[] = {
+    	WX_GL_RGBA,
+    	WX_GL_DOUBLEBUFFER,
+    	WX_GL_DEPTH_SIZE,      16,
+    	WX_GL_STENCIL_SIZE,    0,
+    	0, 0 };
+    #if wxCHECK_VERSION(3,0,0)
+    	graphGL = new wxGLGraph(this, ID_GLCANVAS3, GLCanvasAttributes_1, wxDefaultPosition, wxDefaultSize, 0, _T("ID_GLCANVAS3"));
+    #else
+    	graphGL = new wxGLGraph(this, ID_GLCANVAS3, wxDefaultPosition, wxDefaultSize, 0, _T("ID_GLCANVAS3"), GLCanvasAttributes_1);
+    #endif // wxCHECK_VERSION
+    BoxSizer7->Add(graphGL, 1, wxALL|wxEXPAND, 0);
+    BoxSizer4->Add(BoxSizer7, 1, wxALL|wxEXPAND, 0);
     BoxSizer6 = new wxBoxSizer(wxVERTICAL);
     StaticText3 = new wxStaticText(this, ID_STATICTEXT3, _("music matrix"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE, _T("ID_STATICTEXT3"));
     StaticText3->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BACKGROUND));
@@ -125,42 +164,76 @@ vbsFrame::vbsFrame(wxWindow* parent,wxWindowID id) {
     musicMatrix->SetDefaultCellFont( musicMatrix->GetFont() );
     musicMatrix->SetDefaultCellTextColour( musicMatrix->GetForegroundColour() );
     BoxSizer6->Add(musicMatrix, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-    mmGraph = new WavGraph(this, ID_MMGRAPH, wxDefaultPosition, wxSize(608,62), wxTAB_TRAVERSAL, _T("ID_MMGRAPH"));
-    BoxSizer6->Add(mmGraph, 0, wxALL|wxEXPAND, 2);
+    int GLCanvasAttributes_2[] = {
+    	WX_GL_RGBA,
+    	WX_GL_DOUBLEBUFFER,
+    	WX_GL_DEPTH_SIZE,      16,
+    	WX_GL_STENCIL_SIZE,    0,
+    	0, 0 };
+    #if wxCHECK_VERSION(3,0,0)
+    	mmGraph = new wxGLGraph(this, ID_GLCANVAS4, GLCanvasAttributes_2, wxDefaultPosition, wxSize(612,73), 0, _T("ID_GLCANVAS4"));
+    #else
+    	mmGraph = new wxGLGraph(this, ID_GLCANVAS4, wxDefaultPosition, wxSize(612,73), 0, _T("ID_GLCANVAS4"), GLCanvasAttributes_2);
+    #endif // wxCHECK_VERSION
+    BoxSizer6->Add(mmGraph, 0, wxALL|wxEXPAND, 0);
     StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("spectrum"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE, _T("ID_STATICTEXT2"));
     StaticText2->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BACKGROUND));
     StaticText2->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
     BoxSizer6->Add(StaticText2, 0, wxALL|wxEXPAND, 0);
     BoxSizer8 = new wxBoxSizer(wxVERTICAL);
     BoxSizer9 = new wxBoxSizer(wxVERTICAL);
-    fftGraph = new WavGraph(this, ID_FFT, wxDefaultPosition, wxSize(600,148), wxTAB_TRAVERSAL, _T("ID_FFT"));
-    fftGraph->SetToolTip(_("fft"));
-    BoxSizer9->Add(fftGraph, 1, wxALL|wxEXPAND, 2);
-    BoxSizer8->Add(BoxSizer9, 1, wxALL|wxEXPAND, 2);
+    int GLCanvasAttributes_3[] = {
+    	WX_GL_RGBA,
+    	WX_GL_DOUBLEBUFFER,
+    	WX_GL_DEPTH_SIZE,      16,
+    	WX_GL_STENCIL_SIZE,    0,
+    	0, 0 };
+    #if wxCHECK_VERSION(3,0,0)
+    	fftGraph0 = new wxGLGraph(this, ID_FFT_GRAPH0, GLCanvasAttributes_3, wxDefaultPosition, wxDefaultSize, 0, _T("ID_FFT_GRAPH0"));
+    #else
+    	fftGraph0 = new wxGLGraph(this, ID_FFT_GRAPH0, wxDefaultPosition, wxDefaultSize, 0, _T("ID_FFT_GRAPH0"), GLCanvasAttributes_3);
+    #endif // wxCHECK_VERSION
+    BoxSizer9->Add(fftGraph0, 1, wxALL|wxEXPAND, 0);
+    int GLCanvasAttributes_4[] = {
+    	WX_GL_RGBA,
+    	WX_GL_DOUBLEBUFFER,
+    	WX_GL_DEPTH_SIZE,      16,
+    	WX_GL_STENCIL_SIZE,    0,
+    	0, 0 };
+    #if wxCHECK_VERSION(3,0,0)
+    	fftGraph1 = new wxGLGraph(this, ID_FFT_GRAPH1, GLCanvasAttributes_4, wxDefaultPosition, wxDefaultSize, 0, _T("ID_FFT_GRAPH1"));
+    #else
+    	fftGraph1 = new wxGLGraph(this, ID_FFT_GRAPH1, wxDefaultPosition, wxDefaultSize, 0, _T("ID_FFT_GRAPH1"), GLCanvasAttributes_4);
+    #endif // wxCHECK_VERSION
+    BoxSizer9->Add(fftGraph1, 1, wxALL|wxEXPAND, 0);
+    int GLCanvasAttributes_5[] = {
+    	WX_GL_RGBA,
+    	WX_GL_DOUBLEBUFFER,
+    	WX_GL_DEPTH_SIZE,      16,
+    	WX_GL_STENCIL_SIZE,    0,
+    	0, 0 };
+    #if wxCHECK_VERSION(3,0,0)
+    	fftGraph2 = new wxGLGraph(this, ID_FFT_GRAPH2, GLCanvasAttributes_5, wxDefaultPosition, wxDefaultSize, 0, _T("ID_FFT_GRAPH2"));
+    #else
+    	fftGraph2 = new wxGLGraph(this, ID_FFT_GRAPH2, wxDefaultPosition, wxDefaultSize, 0, _T("ID_FFT_GRAPH2"), GLCanvasAttributes_5);
+    #endif // wxCHECK_VERSION
+    BoxSizer9->Add(fftGraph2, 1, wxALL|wxEXPAND, 0);
+    BoxSizer8->Add(BoxSizer9, 1, wxALL|wxEXPAND, 0);
     BoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
-    BoxSizer11 = new wxBoxSizer(wxVERTICAL);
-    StaticText5 = new wxStaticText(this, ID_STATICTEXT6, _("signal params"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE|wxBORDER_RAISED, _T("ID_STATICTEXT6"));
-    StaticText5->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BACKGROUND));
-    StaticText5->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_MENUHILIGHT));
-    BoxSizer11->Add(StaticText5, 0, wxALL|wxEXPAND, 0);
-    lbSignal = new wxListBox(this, ID_LISTBOX2, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_LISTBOX2"));
-    lbSignal->SetBackgroundColour(wxColour(192,220,192));
-    BoxSizer11->Add(lbSignal, 1, wxALL|wxEXPAND, 0);
-    BoxSizer10->Add(BoxSizer11, 1, wxALL|wxEXPAND, 2);
     BoxSizer12 = new wxBoxSizer(wxVERTICAL);
     StaticText1 = new wxStaticText(this, ID_STATICTEXT5, _("formants"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE|wxBORDER_RAISED, _T("ID_STATICTEXT5"));
     StaticText1->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BACKGROUND));
     StaticText1->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_MENUHILIGHT));
     BoxSizer12->Add(StaticText1, 0, wxALL|wxEXPAND, 0);
     btnPlayFormants = new wxButton(this, ID_BUTTON1, _("play"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-    BoxSizer12->Add(btnPlayFormants, 1, wxALL|wxEXPAND, 0);
+    BoxSizer12->Add(btnPlayFormants, 0, wxALL|wxEXPAND, 0);
     BoxSizer13 = new wxBoxSizer(wxHORIZONTAL);
     slVolume = new wxSlider(this, ID_SLIDER1, 30, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_VERTICAL|wxSL_LABELS, wxDefaultValidator, _T("ID_SLIDER1"));
     wxFont slVolumeFont(9,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL,false,_T("Sans"),wxFONTENCODING_DEFAULT);
     slVolume->SetFont(slVolumeFont);
     slVolume->SetToolTip(_("formants vol."));
-    BoxSizer13->Add(slVolume, 1, wxALL|wxEXPAND, 0);
-    slBinSepp = new wxSlider(this, ID_SLIDER2, 15, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_VERTICAL|wxSL_LABELS, wxDefaultValidator, _T("ID_SLIDER2"));
+    BoxSizer13->Add(slVolume, 0, wxALL|wxEXPAND, 0);
+    slBinSepp = new wxSlider(this, ID_SLIDER2, 15, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_VERTICAL|wxSL_LABELS, wxDefaultValidator, _T("ID_SLIDER2"));
     wxFont slBinSeppFont(9,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL,false,_T("Sans"),wxFONTENCODING_DEFAULT);
     slBinSepp->SetFont(slBinSeppFont);
     slBinSepp->SetToolTip(_("binaural sepparation"));
@@ -175,11 +248,11 @@ vbsFrame::vbsFrame(wxWindow* parent,wxWindowID id) {
     gridFormants->SetColLabelValue(1, _("hz"));
     gridFormants->SetDefaultCellFont( gridFormants->GetFont() );
     gridFormants->SetDefaultCellTextColour( gridFormants->GetForegroundColour() );
-    BoxSizer13->Add(gridFormants, 0, wxALL|wxEXPAND, 0);
+    BoxSizer13->Add(gridFormants, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
     BoxSizer12->Add(BoxSizer13, 0, wxALL|wxEXPAND, 0);
-    BoxSizer10->Add(BoxSizer12, 0, wxALL|wxEXPAND, 2);
+    BoxSizer10->Add(BoxSizer12, 1, wxALL|wxEXPAND, 2);
     BoxSizer8->Add(BoxSizer10, 1, wxALL|wxEXPAND, 2);
-    BoxSizer6->Add(BoxSizer8, 1, wxALL|wxEXPAND, 2);
+    BoxSizer6->Add(BoxSizer8, 1, wxALL|wxEXPAND, 0);
     BoxSizer4->Add(BoxSizer6, 1, wxALL|wxEXPAND, 2);
     BoxSizer3->Add(BoxSizer4, 1, wxALL|wxEXPAND, 2);
     BoxSizer5 = new wxBoxSizer(wxVERTICAL);
@@ -187,11 +260,30 @@ vbsFrame::vbsFrame(wxWindow* parent,wxWindowID id) {
     stSignal->SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BACKGROUND));
     stSignal->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_MENUHILIGHT));
     BoxSizer5->Add(stSignal, 0, wxALL|wxEXPAND, 0);
-    wavGraph = new WavGraph(this, ID_SIGNAL, wxDefaultPosition, wxSize(1228,57), wxTAB_TRAVERSAL, _T("ID_SIGNAL"));
-    wavGraph->SetToolTip(_("signal"));
-    BoxSizer5->Add(wavGraph, 1, wxALL|wxEXPAND, 2);
-    spectrogramGraph = new WavGraph(this, ID_SPECTROGRAM, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_SPECTROGRAM"));
-    BoxSizer5->Add(spectrogramGraph, 1, wxEXPAND, 0);
+    int GLCanvasAttributes_6[] = {
+    	WX_GL_RGBA,
+    	WX_GL_DOUBLEBUFFER,
+    	WX_GL_DEPTH_SIZE,      16,
+    	WX_GL_STENCIL_SIZE,    0,
+    	0, 0 };
+    #if wxCHECK_VERSION(3,0,0)
+    	wavGraphGL = new wxGLGraph(this, ID_GLCANVAS1, GLCanvasAttributes_6, wxDefaultPosition, wxSize(1232,60), 0, _T("ID_GLCANVAS1"));
+    #else
+    	wavGraphGL = new wxGLGraph(this, ID_GLCANVAS1, wxDefaultPosition, wxSize(1232,60), 0, _T("ID_GLCANVAS1"), GLCanvasAttributes_6);
+    #endif // wxCHECK_VERSION
+    BoxSizer5->Add(wavGraphGL, 1, wxALL|wxEXPAND, 0);
+    int GLCanvasAttributes_7[] = {
+    	WX_GL_RGBA,
+    	WX_GL_DOUBLEBUFFER,
+    	WX_GL_DEPTH_SIZE,      16,
+    	WX_GL_STENCIL_SIZE,    0,
+    	0, 0 };
+    #if wxCHECK_VERSION(3,0,0)
+    	spectrogramGraphGL = new wxGLGraph(this, ID_GLCANVAS2, GLCanvasAttributes_7, wxDefaultPosition, wxDefaultSize, 0, _T("ID_GLCANVAS2"));
+    #else
+    	spectrogramGraphGL = new wxGLGraph(this, ID_GLCANVAS2, wxDefaultPosition, wxDefaultSize, 0, _T("ID_GLCANVAS2"), GLCanvasAttributes_7);
+    #endif // wxCHECK_VERSION
+    BoxSizer5->Add(spectrogramGraphGL, 1, wxALL|wxEXPAND, 0);
     BoxSizer3->Add(BoxSizer5, 0, wxALL|wxEXPAND, 2);
     BoxSizer1->Add(BoxSizer3, 1, wxALL|wxEXPAND, 2);
     SetSizer(BoxSizer1);
@@ -207,7 +299,9 @@ vbsFrame::vbsFrame(wxWindow* parent,wxWindowID id) {
     Center();
 
     Connect(ID_DIRPICKERCTRL1,wxEVT_COMMAND_DIRPICKER_CHANGED,(wxObjectEventFunction)&vbsFrame::OndpWavFilesDirChanged);
+    Connect(ID_TOGGLEBUTTON1,wxEVT_COMMAND_TOGGLEBUTTON_CLICKED,(wxObjectEventFunction)&vbsFrame::OntbPlayToggle);
     Connect(ID_LISTBOX1,wxEVT_COMMAND_LISTBOX_SELECTED,(wxObjectEventFunction)&vbsFrame::OnlbWavFilesSelect);
+    Connect(ID_CHOICE2,wxEVT_COMMAND_CHOICE_SELECTED,(wxObjectEventFunction)&vbsFrame::OnchGraphTypeSelect);
     Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&vbsFrame::OnbtnPlayFormantsClick);
     Connect(ID_GRID2,wxEVT_GRID_CELL_LEFT_CLICK,(wxObjectEventFunction)&vbsFrame::OngridFormantsCellLeftClick);
     //*)
@@ -257,11 +351,7 @@ void vbsFrame::drawMusicMatrix() {// fill music matrix
             auto m= mm[oct][note];
             if (m > 0.1) musicMatrix->SetCellValue(wxString::Format("%.0f", 100.0 * m), oct, note);
 
-            if (m==1) {
-                setAttr(oct, note, wxRED, wxWHITE);
-            } else {
-                setAttr(oct, note, &bg, wxBLUE);
-            }
+            setAttr(oct, note, (m==1)?wxRED:&bg, (m==1)?wxWHITE:wxBLUE);
         }
     }
     for (int n=0; n<12; n++) {
@@ -290,39 +380,33 @@ void vbsFrame::loadFiles(wxString path) {
     }
 }
 
+void vbsFrame::playSignal() {
+    wave.samplesPlayed=0;
+    wave.playCompleted=false;
+
+    audio.define(wave.GetChannels(), wave.GetSampleRate(), &wave,
+    [](DataCB *dc, void*buffer, int nFrames) {
+
+        Wave*wave=(Wave*)dc->data;
+        wave->fillBuffer((float*)buffer, nFrames);
+
+        dc->result = (wave->playCompleted) ? paComplete : paContinue;
+    });
+    audio.start();
+}
+
 void vbsFrame::playWave() {
     audio.stop();
 
-    if(cbAutoPlay->IsChecked()) {
-        wave.samplesPlayed=0;
-        wave.playCompleted=false;
-
-        audio.define(wave.GetChannels(), wave.GetSampleRate(), &wave,
-        [](void *dataCB, void*buffer, int nFrames) {
-            DataCB *dc=(DataCB*)dataCB;
-            Wave*wave=(Wave*)dc->data;
-            float*buff=(float*)buffer;
-
-            for (int i=0, si=wave->samplesPlayed; i<nFrames && si<wave->GetNSamples(); i++, si++)
-                buff[i]=wave->GetSample(si);
-
-            wave->samplesPlayed+=nFrames;
-
-            if (wave->samplesPlayed >= wave->GetNSamples()) {
-                wave->samplesPlayed=0;
-                wave->playCompleted=true;
-                dc->result=paComplete;
-            }
-        });
-        audio.start();
-    }
+    if(cbAutoPlay->IsChecked() && wave.isLoaded)
+        playSignal();
 }
 
 void vbsFrame::OnlbWavFilesSelect(wxCommandEvent& event) { // select wav
     lbSignal->Clear();
 
     auto fullName = wxFileName(path, event.GetString()).GetFullPath();
-    if (wave.load(fullName.c_str())) {
+    if (wave.load(fullName.c_str(), wxAtoi(fftValues->GetStringSelection()))) {
         SetTitle("VBS [" + fullName + "]");
 
         playWave();
@@ -341,14 +425,19 @@ void vbsFrame::OnlbWavFilesSelect(wxCommandEvent& event) { // select wav
         }
 
         // graphs
-        wavGraph->SetWav(&wave, GRTYPE_SAMPLES);
-        fftGraph->SetWav(&wave, GRTYPE_FFT);
-        radialGraph->SetWav(&wave, GRTYPE_RADIAL);
-        spiralGraph->SetWav(&wave, GRTYPE_SPIRAL);
+        wavGraphGL->SetWav(&wave, GRTYPE_SAMPLES);
+
+        fftGraph0->SetWav(&wave, GRTYPE_FFT);
+        fftGraph1->SetWav(&wave, GRTYPE_FFT);
+        fftGraph2->SetWav(&wave, GRTYPE_FFT);
+
+        graphGL->SetWav(&wave, (GraphType)((int)GRTYPE_RADIAL + (int)chGraphType->GetSelection()));
+
         mmGraph->SetWav(&wave, GRTYPE_MUSICMATRIX);
-        spectrogramGraph->SetWav(&wave, GRTYPE_SPECTROGRAM);
+        spectrogramGraphGL->SetWav(&wave, GRTYPE_SPECTROGRAM);
 
         drawMusicMatrix();
+
 
         StatusBar1->SetStatusText(wxString::Format("%d channels, %d sample rate, %ld samples, %.1f secs", wave.GetChannels(), wave.GetSampleRate(), wave.GetNSamples(), wave.GetSecs()));
     }
@@ -362,29 +451,28 @@ void vbsFrame::OnbtnPlayFormantsClick(wxCommandEvent& event) {
     else {
         wave.samplesPlayed=0;
         wave.playCompleted=false;
-        wave.volFormants = slVolume->GetValue() / 100.;
-        wave.binSepparation = slBinSepp->GetValue() / 10.;
+        float volFormants = slVolume->GetValue() / 100.;
+        float binSepparation = slBinSepp->GetValue() / 10.;
 
         if (wave.formants.size()!=0) {
             audio.define(2, 44100, &wave, // stereo 44100hz
-            [](void *dataCB, void*buffer, int nFrames) {
+            [=](DataCB *dc, void*buffer, int nFrames) {
 
-                DataCB *dc=(DataCB*)dataCB;
                 Wave*wave=(Wave*)dc->data;
                 float*buff=(float*)buffer;
 
-                double tinc = wave->calcTInc(44100), t = wave->samplesPlayed * tinc; // must double !
+                double tinc = wave->calcTInc(44100), t = wave->samplesPlayed * tinc; // must be double !
 
                 for (int i=0; i<nFrames*2; i+=2, t+=tinc) {
                     float sL=0, sR=0;
                     int cf=5; // only need 5 formants
                     for(auto &frm : wave->formants) {
                         sL+=frm.amp * sinf(frm.hz * t);
-                        sR+=frm.amp * sinf(wave->binSepparation * t) * sinf((wave->binSepparation + frm.hz) * t);
+                        sR+=frm.amp * sinf(binSepparation * t) * sinf((binSepparation + frm.hz) * t);
                         if (--cf == 0) break;
                     }
-                    buff[i+0] = wave->volFormants * (sL / 5);
-                    buff[i+1] = wave->volFormants * (sR / 5);
+                    buff[i+0] = volFormants * (sL / 5);
+                    buff[i+1] = volFormants * (sR / 5);
                 }
                 wave->samplesPlayed+=nFrames;
             });
@@ -392,4 +480,12 @@ void vbsFrame::OnbtnPlayFormantsClick(wxCommandEvent& event) {
             audio.start();
         }
     }
+}
+
+void vbsFrame::OntbPlayToggle(wxCommandEvent& event) {
+    playSignal();
+}
+
+void vbsFrame::OnchGraphTypeSelect(wxCommandEvent& event) {
+    graphGL->SetWav(&wave, (GraphType)((int)GRTYPE_RADIAL + (int)chGraphType->GetSelection()));
 }

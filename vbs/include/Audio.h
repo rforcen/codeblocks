@@ -1,14 +1,16 @@
 #pragma once
 #include <portaudio.h>
+#include <functional>
 
 
-typedef void TsoundCallBack(void *userData, void*buffer, int nFrames);
-
+//typedef void TsoundCallBack(void *userData, void*buffer, int nFrames);
+class DataCB;
+typedef std::function<void(DataCB *userData, void*buffer, int nFrames)> TsoundCallBack;
 
 class DataCB { // container for userdata & callback
     public:
     void *data;
-    TsoundCallBack *callBack;
+    TsoundCallBack callBack;
     PaStreamCallbackResult result;
 };
 

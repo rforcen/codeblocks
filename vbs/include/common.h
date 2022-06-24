@@ -5,10 +5,16 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <functional>
+
 #include "ColorIndex.h"
 
 using namespace std;
 
+typedef enum {GRTYPE_ERROR, GRTYPE_SAMPLES, GRTYPE_FFT, GRTYPE_RADIAL, GRTYPE_SPIRAL, GRTYPE_CONCENTRIC, GRTYPE_MUSICMATRIX, GRTYPE_SPECTROGRAM} GraphType;
+
+
+////////////////////////////////// MusicFreq
 class MusicFreq {
   public:
     static constexpr float MUSICAL_INC = 1.0594630943593,  // 2^(1/12)
@@ -19,19 +25,18 @@ class MusicFreq {
     // Hz 2 octave
     static int Freq2Oct(float freq) {
         if (freq <= 0) return -999;
-        return (int)floor((logf(freq) - LOG_baseC0) / LOG2);
+        return (int)floor((log(freq) - LOG_baseC0) / LOG2);
     }
     // Hz 2 note
     static int Freq2Note(float freq) {
         if (freq <= 0) return 0;
-        return (int)((log(freq) - LOG_baseC0) / LOG_MUSICAL_INC -
-                     Freq2Oct(freq) * 12.);
+        return (int)floor((log(freq) - LOG_baseC0) / LOG_MUSICAL_INC - Freq2Oct(freq) * 12.);
     }
     static const char *Freq2NoteName(float freq) {
         return NoteName(Freq2Note(freq)).c_str();
     }
     static float NoteOct2Freq(int oct, int note=0) {
-        return (baseC0 * powf(MUSICAL_INC, note + 12. * oct));
+        return (baseC0 * pow(MUSICAL_INC, note + 12. * oct));
     }
     static vector<string> &NoteNames() {
         static vector<string>NoteList = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
@@ -42,6 +47,7 @@ class MusicFreq {
     }
 };
 
+////////////////////////////////// RGB
 class RGB {
   public:
     RGB() {}
@@ -49,6 +55,8 @@ class RGB {
     uint8_t r=0,g=0,b=0;
 };
 
+
+////////////////////////////////// Wave
 class Wave {
   public:
     explicit Wave() {}
@@ -67,12 +75,15 @@ class Wave {
         return pSampleData!=nullptr && i<totalPCMFrameCount;
     }
 
-    bool load(const char* file) {
+    bool load(const char* file, const int nFFT2) {
+        this->nFFT2 = nFFT2;
         pSampleData = drwav_open_file_and_read_pcm_frames_f32(file, &channels, &sampleRate, &totalPCMFrameCount, nullptr);
 
         DoFFT();
         calcMusicMatrix();
         calcFormants();
+
+        isLoaded=ok();
 
         return ok();
     }
@@ -149,20 +160,21 @@ class Wave {
     }
 
     void DoFFT() {
-        nFFT=10; // log2(totalPCMFrameCount)+1; //
-        nFFT2=pow(2, nFFT);
-
+//        nFFT=12; // log2(totalPCMFrameCount)+1; //
+//        nFFT2=1 << nFFT;
+        nFFT = (int)log2(nFFT2);
 
         fft = vector<float>(nFFT2+2);
         accFFT = fft;
 
         for (size_t off=0; off<totalPCMFrameCount; off+=nFFT2) {
-            for (auto i=0; i<nFFT2; i++) fft[i]=pSampleData[(i+off) % totalPCMFrameCount];
+            for (auto i=0; i<nFFT2 && (i+off) < totalPCMFrameCount; i++) fft[i]=pSampleData[i+off];
             fft::fft(fft.data(), nFFT);
             fft[0]=0;
 
             for (int i=0; i<nFFT2; i++) accFFT[i]+=fft[i];
         }
+        accFFT.resize(nFFT2);
         fft=accFFT;
         fft::AbsScale(fft.data(), fft.size(), 1);
 
@@ -175,10 +187,31 @@ class Wave {
             }
         }
         maxFreq=fft::Index2Freq(mf, sampleRate, nFFT2);
+
     }
 
     double calcTInc(int sampleRate) { // needs to be double!
         return 2.0 * M_PI / sampleRate;
+    }
+
+    int Freq2Index(float freq) {
+        return fft::Freq2Index(freq, sampleRate, nFFT2);
+    }
+
+    float Index2Freq(int index) {
+        return fft::Index2Freq(index, sampleRate, nFFT2);
+    }
+
+    void fillBuffer(float* buff, int nFrames) {
+       for (int i=0, si=samplesPlayed; i<nFrames && si<(int)GetNSamples(); i++, si++)
+            buff[i]=GetSample(si);
+
+        samplesPlayed+=nFrames;
+
+        if (samplesPlayed >= GetNSamples()) {
+            samplesPlayed=0;
+            playCompleted=true;
+        }
     }
 
   public:
@@ -187,9 +220,10 @@ class Wave {
     int nFFT=0, nFFT2=0;
     drwav_uint64 totalPCMFrameCount=0;
 
+    bool isLoaded=false;
+
     float samplesPlayed=0; // play control
     bool playCompleted=false;
-    float volFormants=0.3, binSepparation=1.5; //hz
 
     float *pSampleData=nullptr;
     float maxFreq;
