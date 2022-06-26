@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="queensFrame">
+		<title>queens</title>
+		<size>458,465</size>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON1" variable="btFirst" member="yes">
+							<label>solve</label>
+							<handler function="OnbtFirstClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL1" variable="nQueens" member="yes">
+							<value>12</value>
+							<min>5</min>
+							<size>131,33</size>
+							<handler function="OnnQueensChange" entry="EVT_SPINCTRL" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<object class="sizeritem">
+						<object class="wxListBox" name="ID_LISTBOX1" variable="lbSolutions" member="yes">
+							<default>-1</default>
+							<size>126,422</size>
+							<handler function="OnlbSolutionsSelect" entry="EVT_LISTBOX" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxGLCanvas" name="ID_GLCANVAS1" subclass="wxGLGraph" variable="board" member="yes">
+							<mLevel>4294967296</mLevel>
+							<mMinAlpha>68719476736</mMinAlpha>
+							<mDepthSize>16</mDepthSize>
+							<size>459,422</size>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
+			<fields>1</fields>
+			<widths>-1</widths>
+			<styles>wxSB_NORMAL</styles>
+		</object>
+	</object>
+</wxsmith>

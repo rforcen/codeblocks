@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="queens" />
+		<Option pch_mode="0" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/queens" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/queens" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-march=k8" />
+					<Add option="-O3" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="`wx-config --cflags`" />
+			<Add option="-Winvalid-pch" />
+			<Add option="-include wx_pch.h" />
+			<Add option="-DWX_PRECOMP" />
+		</Compiler>
+		<Linker>
+			<Add option="`wx-config --libs std,gl` -lGL" />
+		</Linker>
+		<Unit filename="include/Queens.h" />
+		<Unit filename="include/Thread.h" />
+		<Unit filename="include/Timer.h" />
+		<Unit filename="queensApp.cpp" />
+		<Unit filename="queensApp.h" />
+		<Unit filename="queensMain.cpp" />
+		<Unit filename="queensMain.h" />
+		<Unit filename="wxGLGraph.h" />
+		<Unit filename="wxGLImage.cpp" />
+		<Unit filename="wxGLImage.h" />
+		<Unit filename="wx_pch.h">
+			<Option compile="1" />
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="wxsmith/queensframe.wxs" />
+		<Extensions>
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="queensApp.cpp" main="queensFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/queensframe.wxs" src="queensMain.cpp" hdr="queensMain.h" fwddecl="0" i18n="1" name="queensFrame" language="CPP" />
+				</resources>
+			</wxsmith>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
